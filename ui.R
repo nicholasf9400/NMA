@@ -8,21 +8,13 @@ library(shiny)
 
 ui <- navbarPage("NMA",
                  tabPanel('Initialising',
-                          
-                          sidebarPanel("Setup:",
-                                       fileInput('dataset', 'Choose data file for analysis',
-                                                 multiple = FALSE,
-                                                 accept = c('.csv','.xls','.xlsx'),
-                                                 width = NULL,
-                                                 buttonLabel = "Select file",
-                                                 placeholder = "No file selected"),
-                                       
-                                       )
-                          
-                          ),
-                 tabPanel('Resultat matrix'),
-                 tabPanel('Inkonsistens'),
-                 tabPanel('Forresplot')
+                          source('TabPages/Init.R')),
+                 tabPanel('Resultat matrix',
+                          source("TabPages/results.R")),
+                 tabPanel('Inkonsistens',
+                          source("TabPages/Inkons.R")),
+                 tabPanel('Forresplot',
+                          source("TabPages/Forrest.R"))
                  )
 
 shinyUI(ui)
