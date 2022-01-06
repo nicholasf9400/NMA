@@ -11,16 +11,20 @@ library(shiny)
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
-    data <- reactive({
+    observe({
         req(input$dataset)
-    })
-
-
-    observeEvent(data, {
+        data.set <- vroom::vroom(input$dataset$datapath,
+                             header = T,
+                             sep = ',')
+        
+        assign('choices', as.list(unique(c(data.set$'t2', data.set$'t1'))))
+        
+        if(is.null(choices)){
+            choices = 'No data detected'
+        }
         updateCheckboxGroupInput(inputId = 'interventions',
                                  label = 'Choose interventions',
-                                 choices = inter_options,
-                                 selected = inter_options)
+                                 choices = choices,
+                                 selected = choices)
     })
-    
 })
