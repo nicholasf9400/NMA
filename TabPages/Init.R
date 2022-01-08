@@ -6,6 +6,6 @@ sidebarPanel("Setup:",
                        buttonLabel = "Select file",
                        placeholder = "No file selected"),
              checkboxGroupInput('interventions', label = 'Choose interventions',
-                                choices = ('No data detected'))
+                                choices = 'No data loaded')
              
 )
